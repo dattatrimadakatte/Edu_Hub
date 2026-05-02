@@ -1,0 +1,65 @@
+@startuml EduHub_UseCase_Diagram
+
+left to right direction
+
+actor Student
+actor Instructor
+actor Admin
+
+rectangle "EduHub System" {
+  
+  ' Student Use Cases
+  usecase "Register Account" as UC1
+  usecase "Login to System" as UC2
+  usecase "View Dashboard" as UC3
+  usecase "Manage Personal Resources" as UC4
+  usecase "Browse Public Resources" as UC5
+  usecase "Track Learning Progress" as UC6
+  
+  ' Instructor Use Cases
+  usecase "Register as Instructor" as UC7
+  usecase "View Teacher Dashboard" as UC8
+  usecase "Manage Course Resources" as UC9
+  usecase "Monitor Student Progress" as UC10
+  
+  ' Admin Use Cases
+  usecase "Admin Login" as UC11
+  usecase "View System Dashboard" as UC12
+  usecase "Manage Users" as UC13
+  usecase "System Administration" as UC14
+  
+  ' Common Use Cases
+  usecase "Authenticate User" as UC15
+}
+
+' Student connections
+Student --> UC1
+Student --> UC2
+Student --> UC3
+Student --> UC4
+Student --> UC5
+Student --> UC6
+
+' Instructor connections
+Instructor --> UC7
+Instructor --> UC2
+Instructor --> UC8
+Instructor --> UC9
+Instructor --> UC10
+
+' Admin connections
+Admin --> UC11
+Admin --> UC12
+Admin --> UC13
+Admin --> UC14
+
+' Include relationships
+UC2 .> UC15 : <<include>>
+UC11 .> UC15 : <<include>>
+
+' Extend relationships
+UC6 .> UC5 : <<extend>>
+
+note right of UC15 : Common authentication\nprocess for all users
+
+@enduml

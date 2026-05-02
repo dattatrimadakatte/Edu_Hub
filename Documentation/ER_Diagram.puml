@@ -1,0 +1,44 @@
+@startuml EduHub_ER_Diagram
+
+!define ENTITY class
+!define RELATIONSHIP diamond
+
+ENTITY User {
+  + user_id : INT <<PK>>
+  --
+  name : VARCHAR
+  email : VARCHAR <<UNIQUE>>
+  hashed_password : VARCHAR
+  role : VARCHAR
+  is_active : BOOLEAN
+}
+
+ENTITY Resource {
+  + resource_id : INT <<PK>>
+  --
+  title : VARCHAR
+  url : VARCHAR
+  resource_type : VARCHAR
+  category : VARCHAR
+  is_public : BOOLEAN
+  + owner_id : INT <<FK>>
+}
+
+ENTITY LearningProgress {
+  + progress_id : INT <<PK>>
+  --
+  total_time_seconds : INT
+  last_position : VARCHAR
+  + user_id : INT <<FK>>
+  + resource_id : INT <<FK>>
+}
+
+User ||--o{ Resource : "owns"
+User ||--o{ LearningProgress : "tracks"
+Resource ||--o{ LearningProgress : "monitored_by"
+
+note right of User : Roles: student, instructor, admin
+note right of Resource : Types: YouTube, PDF, GitHub, Website
+note right of LearningProgress : Tracks user progress on resources
+
+@enduml

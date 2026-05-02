@@ -1,0 +1,56 @@
+@startuml EduHub_DFD_Level1
+
+!define EXTERNAL rectangle
+!define PROCESS circle
+!define DATASTORE storage
+
+EXTERNAL Student
+EXTERNAL Instructor
+EXTERNAL Admin
+
+PROCESS "P1\nUser\nAuthentication" as P1
+PROCESS "P2\nUser\nRegistration" as P2
+PROCESS "P3\nResource\nManagement" as P3
+PROCESS "P4\nDashboard\nGeneration" as P4
+PROCESS "P5\nProgress\nTracking" as P5
+PROCESS "P6\nAdmin\nManagement" as P6
+
+DATASTORE "D1\nUsers\nDatabase" as D1
+DATASTORE "D2\nResources\nDatabase" as D2
+DATASTORE "D3\nProgress\nDatabase" as D3
+
+' External to Process flows
+Student --> P1 : Login Credentials
+Student --> P2 : Registration Data
+Student --> P3 : Resource CRUD
+Student --> P5 : Learning Activity
+
+Instructor --> P1 : Login Credentials
+Instructor --> P3 : Course Resources
+
+Admin --> P1 : Admin Credentials
+Admin --> P6 : Management Commands
+
+' Process to External flows
+P4 --> Student : Dashboard Data
+P4 --> Instructor : Analytics Data
+P4 --> Admin : System Reports
+P3 --> Student : Resource Lists
+
+' Process to Data Store flows
+P1 --> D1 : Authentication Query
+P2 --> D1 : New User Data
+P3 --> D2 : Resource CRUD
+P5 --> D3 : Progress Updates
+P6 --> D1 : User Management
+
+' Data Store to Process flows
+D1 --> P1 : User Credentials
+D1 --> P4 : User Data
+D2 --> P4 : Resource Data
+D3 --> P4 : Progress Data
+
+' Process to Process flows
+P1 --> P4 : Authenticated User
+
+@enduml

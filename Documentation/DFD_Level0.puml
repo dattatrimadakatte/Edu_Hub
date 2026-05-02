@@ -1,0 +1,23 @@
+@startuml EduHub_DFD_Level0
+
+!define EXTERNAL rectangle
+!define SYSTEM circle
+
+EXTERNAL Student
+EXTERNAL Instructor  
+EXTERNAL Admin
+
+SYSTEM "EduHub\nLearning Management\nSystem" as System
+
+Student --> System : Registration Data\nLogin Credentials\nResource Data
+System --> Student : Dashboard Data\nResource List\nProgress Reports
+
+Instructor --> System : Course Resources\nLogin Credentials
+System --> Instructor : Student Statistics\nCourse Analytics
+
+Admin --> System : Admin Credentials\nUser Management Commands
+System --> Admin : System Statistics\nUser Lists
+
+note bottom of System : Central learning\nmanagement system
+
+@enduml
