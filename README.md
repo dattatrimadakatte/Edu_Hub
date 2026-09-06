@@ -37,8 +37,4 @@ The objective of EduHub is to develop a simple digital educational platform that
 * Search functionality
 * Database integration
 
-## 👨‍💻 Developer
 
-**Dattatri Madakatte**
-
-This project was developed as part of my learning and web development experience.
